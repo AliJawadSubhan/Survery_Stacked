@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "684710666845",
+    "project_id": "tech-idara-auth",
+    "storage_bucket": "tech-idara-auth.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:684710666845:android:3e66285093e2e3bfc023b4",
+        "android_client_info": {
+          "package_name": "com.example.stacked_tech_idara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "684710666845-dtrreu0g1s9coe673fc2q2bobos80qta.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPajA23RLWuLIL_4cBYLvM9qpRS2iQdMA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "684710666845-dtrreu0g1s9coe673fc2q2bobos80qta.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

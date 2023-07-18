@@ -8,10 +8,14 @@ class FireStoreServices {
   var db = FirebaseFirestore.instance;
 
   Future sendUsertoDatabase(String username, String id) async {
-    return await db
-        .collection('surveryusers')
-        .doc(id)
-        .set({'username': username.trim()});
+    try {
+      return await db
+          .collection('surveryusers')
+          .doc(id)
+          .set({'username': username.trim()});
+    } catch (e) {
+      log('firestore: ${e.toString()}');
+    }
   }
 
   Stream<Surveryusers> getSurveryUsers(String currentUserUid) {
@@ -29,7 +33,6 @@ class FireStoreServices {
     var questions = <Question>[];
     return questionCollection.snapshots().map((querySnapshot) {
       for (var singleQuestion in querySnapshot.docs) {
-        questions.clear();
         Question question = Question.fromJson(singleQuestion);
         questions.add(question);
       }

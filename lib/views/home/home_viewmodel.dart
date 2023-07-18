@@ -3,6 +3,7 @@ import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
 import 'package:stacked_tech_idara/base/app.locator.dart';
 import 'package:stacked_tech_idara/base/app.router.dart';
+import 'package:stacked_tech_idara/common/widgets/fancy_alertbox.dart';
 import 'package:stacked_tech_idara/model/question_model.dart';
 import 'package:stacked_tech_idara/model/user_model.dart';
 import 'package:stacked_tech_idara/services/auth_services.dart';
@@ -27,60 +28,35 @@ class HomeViewModel extends BaseViewModel {
     bool? value,
     String checkboxType,
     Question questionModel,
-    checkBoxState,
   ) async {
     switch (checkboxType) {
       case 'agree':
-        if (value == true) {
-          if (checkBoxState.agree == false) {
-            if (checkBoxState.disagree == true) {
-              checkBoxState.disagree = false;
-              questionModel.disagree -= 1;
-            } else if (checkBoxState.neutral == true) {
-              checkBoxState.neutral = false;
-              questionModel.neutral += 1;
-            }
-            checkBoxState.agree = true;
-            questionModel.agree -= 1;
-          }
-        } else {
-          checkBoxState.agree = false;
+        agree = value == true;
+        if (agree) {
+          disagree = false;
+          neutral = false;
           questionModel.agree += 1;
+          questionModel.disagree = 0;
+          questionModel.neutral = 0;
         }
         break;
       case 'disagree':
-        if (value == true) {
-          if (checkBoxState.disagree == false) {
-            if (checkBoxState.agree == true) {
-              checkBoxState.agree = false;
-              questionModel.agree += 1;
-            } else if (checkBoxState.neutral == true) {
-              checkBoxState.neutral = false;
-              questionModel.neutral += 1;
-            }
-            checkBoxState.disagree = true;
-            questionModel.disagree -= 1;
-          }
-        } else {
-          checkBoxState.disagree = false;
+        disagree = value == true;
+        if (disagree) {
+          agree = false;
+          neutral = false;
+          questionModel.agree = 0;
           questionModel.disagree += 1;
+          questionModel.neutral = 0;
         }
         break;
       case 'neutral':
-        if (value == true) {
-          if (checkBoxState.neutral == false) {
-            if (checkBoxState.agree == true) {
-              checkBoxState.agree = false;
-              questionModel.agree += 1;
-            } else if (checkBoxState.disagree == true) {
-              checkBoxState.disagree = false;
-              questionModel.disagree += 1;
-            }
-            checkBoxState.neutral = true;
-            questionModel.neutral -= 1;
-          }
-        } else {
-          checkBoxState.neutral = false;
+        neutral = value == true;
+        if (neutral) {
+          agree = false;
+          disagree = false;
+          questionModel.agree = 0;
+          questionModel.disagree = 0;
           questionModel.neutral += 1;
         }
         break;
@@ -88,8 +64,11 @@ class HomeViewModel extends BaseViewModel {
         break;
     }
 
+    // Notify listeners that the ViewModel has changed
+    notifyListeners();
+
+    // Call the service or update data in firestore if needed
     await firestoreService.updateData(questionModel);
-    rebuildUi();
   }
 
   String? email = '';

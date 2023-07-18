@@ -9,13 +9,38 @@ class LoginView extends StackedView<LoginViewModel> {
   Widget builder(
       BuildContext context, LoginViewModel viewModel, Widget? child) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: const Color(0xFFB0E0E6),
+        actions: [
+          GestureDetector(
+            onTap: () {
+              viewModel.init(context);
+            },
+            child: Container(
+              margin: const EdgeInsets.all(12),
+              child: const Icon(
+                Icons.info_outline,
+                size: 22,
+                color: Colors.black,
+              ),
+            ),
+          ),
+        ],
+      ),
       backgroundColor: const Color(0xFFB0E0E6),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Center(
-              child: Text("Take a Survey! :D"),
+            Center(
+              child: Text(
+                "Welcome, Take a survey.",
+                style: TextStyle(
+                    color: Colors.grey[800],
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
             ),
             Form(
               child: Builder(builder: (context) {
@@ -56,7 +81,9 @@ class LoginView extends StackedView<LoginViewModel> {
                       ),
                       const SizedBox(height: 20),
                       viewModel.isLoading
-                          ? const CircularProgressIndicator()
+                          ? const CircularProgressIndicator(
+                              color: Colors.blueGrey,
+                            )
                           : SizedBox(
                               width: 250,
                               height: 50,
@@ -89,6 +116,14 @@ class LoginView extends StackedView<LoginViewModel> {
         ),
       ),
     );
+  }
+
+  @override
+  void onViewModelReady(LoginViewModel viewModel) {}
+
+  @override
+  bool get reactive {
+    return true;
   }
 
   @override

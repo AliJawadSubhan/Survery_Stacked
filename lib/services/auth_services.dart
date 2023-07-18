@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:stacked_tech_idara/base/app.locator.dart';
 import 'package:stacked_tech_idara/services/db_services.dart';
@@ -12,6 +14,7 @@ class AuthService {
       await createGuestUser(username);
       return true;
     } catch (e) {
+      log(e.toString());
       return false;
     }
   }

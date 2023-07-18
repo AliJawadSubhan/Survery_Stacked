@@ -9,6 +9,7 @@ class SplashView extends StackedView<SplashViewModel> {
   Widget builder(
       BuildContext context, SplashViewModel viewModel, Widget? child) {
     return const Scaffold(
+      backgroundColor: Color(0xFFB0E0E6),
       body: Center(
         child: Text(
           'SPLASH SCREEN',

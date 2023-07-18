@@ -1,32 +1,32 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:stacked_tech_idara/base/app.locator.dart';
+import 'package:stacked_tech_idara/services/db_services.dart';
 
 class AuthService {
-  Future<bool> loginService(String email, String password) async {
+  final fireStoreService = locator<FireStoreServices>();
+
+  Future<bool> loginService(String username) async {
 // trry
+
     try {
-      await login(email, password);
+      await createGuestUser(username);
       return true;
     } catch (e) {
-      try {
-        await create(email, password);
-        return true;
-      } catch (e) {
-        return false;
-      }
+      return false;
     }
   }
 
-  String? get email => FirebaseAuth.instance.currentUser?.email;
-
-  login(String email, String password) async {
-    UserCredential userCredential = await FirebaseAuth.instance
-        .signInWithEmailAndPassword(email: email, password: password);
+  createGuestUser(String username) async {
+    UserCredential userCredential =
+        await FirebaseAuth.instance.signInAnonymously();
+    String userUid = userCredential.user!.uid;
+    await fireStoreService.sendUsertoDatabase(username, userUid);
     //  userCredential.user.displayName;
   }
 
-  create(String email, String password) async {
-    UserCredential userCredential = await FirebaseAuth.instance
-        .createUserWithEmailAndPassword(email: email, password: password);
-    //  userCredential.user.displayName;
+  String? get userUid => FirebaseAuth.instance.currentUser?.uid;
+
+  logout() async {
+    await FirebaseAuth.instance.signOut();
   }
 }

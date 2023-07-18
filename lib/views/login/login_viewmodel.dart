@@ -1,6 +1,5 @@
 import 'dart:developer';
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:stacked/stacked.dart';
 import 'package:stacked_services/stacked_services.dart';
@@ -11,8 +10,7 @@ import 'package:stacked_tech_idara/services/auth_services.dart';
 class LoginViewModel extends BaseViewModel {
   final _authService = locator<AuthService>();
   final navigationService = locator<NavigationService>();
-  TextEditingController emailController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   bool isLoading = false;
   void onLoginTap(BuildContext context) async {
     isLoading = true;
@@ -20,34 +18,28 @@ class LoginViewModel extends BaseViewModel {
     if (!Form.of(context).validate()) {
       isLoading = false;
       rebuildUi();
-      return;
     } else {
-      log('Not Logged In lmfao loser');
+      log('Form error');
     }
-    var res = await runBusyFuture(_authService.loginService(
-        emailController.text, passwordController.text));
+    var res = await runBusyFuture(
+      _authService.loginService(
+        usernameController.text.trim(),
+      ),
+    );
     isLoading = false;
     rebuildUi();
     if (res == true) {
-      navigationService.navigateTo(Routes.homeView);
+      navigationService.pushNamedAndRemoveUntil(Routes.homeView);
     }
+    if (res == false) {}
   }
 
-  String? validateEmail(String value) {
-    if (value.isEmpty) {
-      return 'Please enter your email';
+  String? validateUsername(String? value) {
+    if (value!.length < 3) {
+      return 'Type your full name';
     }
-    return null;
-  }
-
-  String? validatePassword(String value) {
-    if (value.isEmpty) {
-      log('Not Logged In lmfao loser');
-      return 'Please enter your password';
-    }
-    if (value.length < 6) {
-      log('Not Logged In lmfao loser');
-      return 'Give me Strong passowrds';
+    if (value == '') {
+      return 'Please enter your name';
     }
     return null;
   }

@@ -1,16 +1,2 @@
-# stacked_tech_idara
-
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Demo
+https://github.com/AliJawadSubhan/Survery_Stacked/assets/97254328/f86a25a7-ca6b-4a98-8be6-14f0cfc1dcda

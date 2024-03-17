@@ -13,4 +13,4 @@ See how it works.
 - **Login:** Securely sign in with Firebase Auth.
 - **Create Surveys:** Easily make surveys with Firestore.
 - **Take Surveys:** Participate in surveys and see results.
-- **State Management:** Smooth and responsive app experience using *Stacked*.
+- **State Management:** Smooth and responsive app experience using **Stacked**.

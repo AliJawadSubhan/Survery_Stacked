@@ -5,8 +5,7 @@ A simple app for creating and taking surveys. Uses Firebase Auth for login, Fire
 ## Features
 
 - **Login:** Securely sign in with Firebase Auth.
-- **Create Surveys:** Easily make surveys with Firestore.
-- **Take Surveys:** Participate in surveys and see results.
+- **Take Surveys:** Participate in surveys.
 - **State Management:** Smooth and responsive app experience using **Stacked**.
 
 ## Demo
